@@ -2,9 +2,9 @@
 namespace GDO\Avatar;
 
 use GDO\User\User;
-use GDO\DB\GDO_ObjectSelect;
+use GDO\DB\GDT_ObjectSelect;
 
-final class GDO_Avatar extends GDO_ObjectSelect
+final class GDT_Avatar extends GDT_ObjectSelect
 {
 	/**
 	 * @var User

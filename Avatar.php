@@ -2,10 +2,10 @@
 namespace GDO\Avatar;
 
 use GDO\DB\GDO;
-use GDO\DB\GDO_AutoInc;
-use GDO\DB\GDO_CreatedBy;
-use GDO\File\GDO_File;
-use GDO\Type\GDO_Checkbox;
+use GDO\DB\GDT_AutoInc;
+use GDO\DB\GDT_CreatedBy;
+use GDO\File\GDT_File;
+use GDO\Type\GDT_Checkbox;
 use GDO\User\User;
 /**
  * An avatar image file.
@@ -17,10 +17,10 @@ class Avatar extends GDO
 	public function gdoColumns()
 	{
 		return array(
-			GDO_AutoInc::make('avatar_id'),
-			GDO_File::make('avatar_file_id')->notNull(),
-			GDO_CreatedBy::make('avatar_created_by')->notNull(),
-			GDO_Checkbox::make('avatar_public')->initial('0'),
+			GDT_AutoInc::make('avatar_id'),
+			GDT_File::make('avatar_file_id')->notNull(),
+			GDT_CreatedBy::make('avatar_created_by')->notNull(),
+			GDT_Checkbox::make('avatar_public')->initial('0'),
 		);
 	}
 	
@@ -58,12 +58,12 @@ class Avatar extends GDO
 	
 	/**
 	 * @param User $user
-	 * @return GDO_Avatar
+	 * @return GDT_Avatar
 	 */
 	public function getGDOAvatar(User $user)
 	{
 		static $gdoType;
-		if (!$gdoType) $gdoType = GDO_Avatar::make();
+		if (!$gdoType) $gdoType = GDT_Avatar::make();
 		return $gdoType->user($user)->gdo($this);
 	}
 	

@@ -2,10 +2,10 @@
 namespace GDO\Avatar;
 
 use GDO\DB\GDO;
-use GDO\DB\GDO_EditedAt;
-use GDO\DB\GDO_Object;
+use GDO\DB\GDT_EditedAt;
+use GDO\DB\GDT_Object;
 use GDO\File\File;
-use GDO\User\GDO_User;
+use GDO\User\GDT_User;
 use GDO\User\User;
 
 final class UserAvatar extends GDO
@@ -15,9 +15,9 @@ final class UserAvatar extends GDO
 	public function gdoColumns()
 	{
 		return array(
-			GDO_User::make('avt_user_id')->primary(),
-			GDO_Object::make('avt_avatar_id')->table(Avatar::table())->notNull(),
-			GDO_EditedAt::make('avt_edited_at'),
+			GDT_User::make('avt_user_id')->primary(),
+			GDT_Object::make('avt_avatar_id')->table(Avatar::table())->notNull(),
+			GDT_EditedAt::make('avt_edited_at'),
 		);
 	}
 	

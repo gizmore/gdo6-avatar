@@ -1,5 +1,5 @@
-<?php use GDO\Avatar\GDO_Avatar;
-$field instanceof GDO_Avatar; ?>
+<?php use GDO\Avatar\GDT_Avatar;
+$field instanceof GDT_Avatar; ?>
 <gdo-avatar
  class="<?= $field->user->getGender(); ?> md-avatar">
   <img

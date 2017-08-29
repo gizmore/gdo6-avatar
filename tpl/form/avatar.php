@@ -1,7 +1,7 @@
 <?php
 use GDO\Avatar\Avatar;
-use GDO\Avatar\GDO_Avatar;
-$field instanceof GDO_Avatar;
+use GDO\Avatar\GDT_Avatar;
+$field instanceof GDT_Avatar;
 ?>
 <md-input-container class="md-block md-float md-icon-left" flex>
   <label><?= $field->label; ?></label>
