@@ -1,7 +1,7 @@
 <?php
 namespace GDO\Avatar;
 
-use GDO\User\User;
+use GDO\User\GDO_User;
 use GDO\DB\GDT_ObjectSelect;
 
 final class GDT_Avatar extends GDT_ObjectSelect
@@ -12,12 +12,12 @@ final class GDT_Avatar extends GDT_ObjectSelect
 	public $user;
 	public function currentUser()
 	{
-		return $this->user(User::current());
+		return $this->user(GDO_User::current());
 	}
-	public function user(User $user)
+	public function user(GDO_User $user)
 	{
 		$this->user = $user;
-		$this->var = Avatar::forUser($user)->getID();
+		$this->var = GDO_Avatar::forUser($user)->getID();
 		$this->var = $this->var > 0 ? $this->var : null;
 		$this->emptyLabel = t('choice_no_avatar_please');
 		return $this->label('avatar');
@@ -25,7 +25,7 @@ final class GDT_Avatar extends GDT_ObjectSelect
 	
 	public function getValue()
 	{
-		return Avatar::getById($this->getVar());
+	    return GDO_Avatar::getById($this->getVar());
 	}
 	
 	public function validate($value)
@@ -39,8 +39,8 @@ final class GDT_Avatar extends GDT_ObjectSelect
 	
 	public function avatarChoices()
 	{
-		$query = Avatar::table()->select();
-		$result = $query->joinObject('avatar_file_id')->select('gwf_file.*')->where("avatar_public OR avatar_created_by={$this->user->getID()}")->exec();
+	    $query = GDO_Avatar::table()->select();
+		$result = $query->joinObject('avatar_file_id')->select('gdo_file.*')->where("avatar_public OR avatar_created_by={$this->user->getID()}")->exec();
 		$choices = array();
 		while ($gwfAvatar = $result->fetchObject())
 		{

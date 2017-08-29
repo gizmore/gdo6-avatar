@@ -1,5 +1,5 @@
 <?php
-use GDO\Avatar\Avatar;
+use GDO\Avatar\GDO_Avatar;
 use GDO\Avatar\GDT_Avatar;
 $field instanceof GDT_Avatar;
 ?>
@@ -11,7 +11,7 @@ $field instanceof GDT_Avatar;
    ng-init='init(<?= $field->displayJSON(); ?>)'
    ng-change="valueSelected('#gwfsel_<?= $field->name; ?>')">
     <md-option value="0"><?= t('no_avatar'); ?></md-option>
-    <?php foreach ($field->choices as $value => $gwfAvatar) : $gwfAvatar instanceof Avatar; ?>
+    <?php foreach ($field->choices as $value => $gwfAvatar) : $gwfAvatar instanceof GDO_Avatar; ?>
     <md-option value="<?= $value; ?>">
       <?= $gwfAvatar->getGDOAvatar($field->user)->renderCell(); ?>
       <?= $gwfAvatar->getVar('file_name'); ?>

@@ -1,7 +1,7 @@
 <?php
 namespace GDO\Avatar\Websocket;
 
-use GDO\Avatar\Avatar;
+use GDO\Avatar\GDO_Avatar;
 use GDO\Websocket\Server\GWS_CommandForm;
 use GDO\Websocket\Server\GWS_Commands;
 use GDO\Websocket\Server\GWS_Global;
@@ -16,7 +16,7 @@ final class GWS_AvatarSet extends GWS_CommandForm
 		$user = GWS_Global::recacheUser($userId);
 		$payload = GWS_Message::payload(0x0401);
 		$payload .= GWS_Message::wr32($user->getID());
-		$payload .= GWS_Message::wr32(Avatar::forUser($user)->getFileID());
+		$payload .= GWS_Message::wr32(GDO_Avatar::forUser($user)->getFileID());
 		GWS_Global::broadcastBinary($payload);
 	}
 }

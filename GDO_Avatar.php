@@ -6,12 +6,12 @@ use GDO\DB\GDT_AutoInc;
 use GDO\DB\GDT_CreatedBy;
 use GDO\File\GDT_File;
 use GDO\Type\GDT_Checkbox;
-use GDO\User\User;
+use GDO\User\GDO_User;
 /**
  * An avatar image file.
  * @author gizmore
  */
-class Avatar extends GDO
+class GDO_Avatar extends GDO
 {
 	public function gdoCached() { return false; }
 	public function gdoColumns()
@@ -33,41 +33,41 @@ class Avatar extends GDO
 	}
 	
 	/**
-	 * @param User $user
-	 * @return Avatar
+	 * @param GDO_User $user
+	 * @return self
 	 */
-	public static function forUser(User $user)
+	public static function forUser(GDO_User $user)
 	{
-		if (!($avatar = $user->tempGet('gwf_avatar')))
+		if (!($avatar = $user->tempGet('gdo_avatar')))
 		{
 			$avatarTable = self::table();
 			
-			$query = UserAvatar::table()->select();
-			$query->joinObject('avt_avatar_id')->select('gwf_file.*');
-			$query->join('JOIN gwf_file ON file_id = avatar_file_id');
+			$query = GDO_UserAvatar::table()->select();
+			$query->joinObject('avt_avatar_id')->select('gdo_file.*');
+			$query->join('JOIN gdo_file ON file_id = avatar_file_id');
 			$query->where('avt_user_id='.$user->getID())->first();
 			if (!($avatar = $query->exec()->fetchAs($avatarTable)))
 			{
 				$avatar = self::default();
 			}
-			$user->tempSet('gwf_avatar', $avatar);
+			$user->tempSet('gdo_avatar', $avatar);
 			$user->recache();
 		}
 		return $avatar;
 	}
 	
 	/**
-	 * @param User $user
+	 * @param GDO_User $user
 	 * @return GDT_Avatar
 	 */
-	public function getGDOAvatar(User $user)
+	public function getGDOAvatar(GDO_User $user)
 	{
 		static $gdoType;
 		if (!$gdoType) $gdoType = GDT_Avatar::make();
 		return $gdoType->user($user)->gdo($this);
 	}
 	
-	public static function renderAvatar(User $user)
+	public static function renderAvatar(GDO_User $user)
 	{
 		return self::forUser($user)->getGDOAvatar($user)->renderCell();
 	}
