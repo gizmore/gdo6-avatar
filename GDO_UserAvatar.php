@@ -1,7 +1,7 @@
 <?php
 namespace GDO\Avatar;
 
-use GDO\DB\GDO;
+use GDO\Core\GDO;
 use GDO\DB\GDT_EditedAt;
 use GDO\DB\GDT_Object;
 use GDO\File\GDO_File;
