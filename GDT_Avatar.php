@@ -7,7 +7,7 @@ use GDO\DB\GDT_ObjectSelect;
 final class GDT_Avatar extends GDT_ObjectSelect
 {
 	/**
-	 * @var User
+	 * @var GDO_User
 	 */
 	public $user;
 	public function currentUser()

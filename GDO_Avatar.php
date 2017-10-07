@@ -5,7 +5,7 @@ use GDO\Core\GDO;
 use GDO\DB\GDT_AutoInc;
 use GDO\DB\GDT_CreatedBy;
 use GDO\File\GDT_File;
-use GDO\Type\GDT_Checkbox;
+use GDO\DB\GDT_Checkbox;
 use GDO\User\GDO_User;
 /**
  * An avatar image file.
@@ -27,7 +27,7 @@ class GDO_Avatar extends GDO
 	public function getID() { return $this->getVar('avatar_id'); }
 	public function getFileID() { return $this->getVar('avatar_file_id'); }
 	
-	public static function default()
+	public static function defaultAvatar()
 	{
 		return self::table()->blank(['avatar_id'=>'0']);
 	}
@@ -48,7 +48,7 @@ class GDO_Avatar extends GDO
 			$query->where('avt_user_id='.$user->getID())->first();
 			if (!($avatar = $query->exec()->fetchAs($avatarTable)))
 			{
-				$avatar = self::default();
+				$avatar = self::defaultAvatar();
 			}
 			$user->tempSet('gdo_avatar', $avatar);
 			$user->recache();

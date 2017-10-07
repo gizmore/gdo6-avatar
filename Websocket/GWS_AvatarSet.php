@@ -11,7 +11,7 @@ final class GWS_AvatarSet extends GWS_CommandForm
 {
 	public function getMethod() { return method('Avatar', 'Set'); }
 	
-	public function hookAvatarSet(string $userId)
+	public function hookAvatarSet($userId)
 	{
 		$user = GWS_Global::recacheUser($userId);
 		$payload = GWS_Message::payload(0x0401);

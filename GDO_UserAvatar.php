@@ -36,7 +36,7 @@ final class GDO_UserAvatar extends GDO
 		return true;
 	}
 	
-	public static function createAvatarFromString(GDO_User $user, string $filename, string $contents)
+	public static function createAvatarFromString(GDO_User $user, $filename, $contents)
 	{
 		$file = GDO_File::fromString($filename, $contents)->copy();
 		$avatar = GDO_Avatar::blank(['avatar_file_id' => $file->getID()])->insert();

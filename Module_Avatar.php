@@ -4,7 +4,7 @@ namespace GDO\Avatar;
 use GDO\Core\GDO_Module;
 use GDO\User\GDO_User;
 use GDO\UI\GDT_Link;
-use GDO\Template\GDT_Bar;
+use GDO\UI\GDT_Bar;
 
 final class Module_Avatar extends GDO_Module
 {
@@ -24,7 +24,7 @@ final class Module_Avatar extends GDO_Module
 	    if (!$user->isGhost())
 	    {
 	        $icon = GDT_Avatar::make('avatar')->user($user)->gdo(GDO_Avatar::forUser($user))->renderCell();
-			$navbar->addField(GDT_Link::make('btn_avatar')->rawIcon($icon)->href($this->getMethodHREF('Set')));
+			$navbar->addField(GDT_Link::make('btn_avatar')->rawIcon($icon)->href(href('Avatar', 'Set')));
 		}
 	}
 }
