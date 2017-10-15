@@ -71,4 +71,5 @@ class GDO_Avatar extends GDO
 	{
 		return self::forUser($user)->getGDOAvatar($user)->renderCell();
 	}
+	
 }

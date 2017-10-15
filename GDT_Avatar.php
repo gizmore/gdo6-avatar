@@ -6,6 +6,12 @@ use GDO\DB\GDT_ObjectSelect;
 
 final class GDT_Avatar extends GDT_ObjectSelect
 {
+	public function __construct()
+	{
+		$this->table(GDO_Avatar::table());
+		$this->currentUser();
+	}
+	
 	/**
 	 * @var GDO_User
 	 */
@@ -23,24 +29,27 @@ final class GDT_Avatar extends GDT_ObjectSelect
 		return $this->label('avatar');
 	}
 	
-	public function getValue()
-	{
-	    return GDO_Avatar::getById($this->getVar());
-	}
+// 	public function getValue()
+// 	{
+// 	    return GDO_Avatar::getById($this->getVar());
+// 	}
 	
-	public function validate($value)
+// 	public function validate($value)
+// 	{
+// 		return parent::validate($value);
+// 	}
+	
+	public function initChoices()
 	{
-	    if (!$this->choices)
+		if (!$this->choices)
 		{
 			$this->choices($this->avatarChoices());
 		}
-		return parent::validate($value);
 	}
-	
 	public function avatarChoices()
 	{
 	    $query = GDO_Avatar::table()->select();
-		$result = $query->joinObject('avatar_file_id')->select('gdo_file.*')->where("avatar_public OR avatar_created_by={$this->user->getID()}")->exec();
+		$result = $query->joinObject('avatar_file_id')->select('gdo_avatar.*, gdo_file.*')->where("avatar_public OR avatar_created_by={$this->user->getID()}")->exec();
 		$choices = array();
 		while ($gwfAvatar = $result->fetchObject())
 		{
@@ -49,15 +58,22 @@ final class GDT_Avatar extends GDT_ObjectSelect
 		return $choices;
 	}
 	
-	public function renderForm()
+// 	public function renderForm()
+// 	{
+// 		if (!$this->choices)
+// 		{
+// 			$this->choices($this->avatarChoices());
+// 		}
+// 		return Module_Avatar::instance()->templatePHP('form/avatar.php', ['field'=>$this]);
+// 	}
+	public function renderChoice($avatar)
 	{
-		if (!$this->choices)
-		{
-			$this->choices($this->avatarChoices());
-		}
-		return Module_Avatar::instance()->templatePHP('form/avatar.php', ['field'=>$this]);
+		$gdo = $this->gdo;
+		$html = Module_Avatar::instance()->templatePHP('cell/avatar.php', ['field'=>$this->gdo($avatar)]);
+		$this->gdo = $gdo;
+		return $html;
 	}
-	
+
 	public function renderCell()
 	{
 		return Module_Avatar::instance()->templatePHP('cell/avatar.php', ['field'=>$this]);
