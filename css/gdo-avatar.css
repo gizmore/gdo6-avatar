@@ -1,14 +1,14 @@
-gdo-avatar, gdo-avatar img {
-	width: 42px;
-	height: 42px;
+.gdo-avatar, .gdo-avatar img {
+	width: 32px;
+	height: 32px;
 	border-radius: 50%;
 	display: inline-block;
 }
-gdo-avatar img {
-	width: 42px;
-	height: 42px;
+.gdo-avatar img {
+	width: 32px;
+	height: 32px;
 	padding: 2px;
 	background: #aaa;
 }
-gdo-avatar.male img { background: #369; }
-gdo-avatar.female img { background: #f08; }
+.gdo-avatar.male img { background: #369; }
+.gdo-avatar.female img { background: #f08; }
