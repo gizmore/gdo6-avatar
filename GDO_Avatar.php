@@ -43,7 +43,7 @@ class GDO_Avatar extends GDO
 			$avatarTable = self::table();
 			
 			$query = GDO_UserAvatar::table()->select();
-			$query->joinObject('avt_avatar_id')->select('gdo_file.*');
+			$query->joinObject('avt_avatar_id')->select('*, gdo_file.*');
 			$query->join('JOIN gdo_file ON file_id = avatar_file_id');
 			$query->where('avt_user_id='.$user->getID())->first();
 			if (!($avatar = $query->exec()->fetchAs($avatarTable)))

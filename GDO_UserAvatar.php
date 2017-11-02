@@ -7,6 +7,7 @@ use GDO\DB\GDT_Object;
 use GDO\File\GDO_File;
 use GDO\User\GDT_User;
 use GDO\User\GDO_User;
+use GDO\DB\GDT_CreatedAt;
 
 final class GDO_UserAvatar extends GDO
 {
@@ -17,7 +18,7 @@ final class GDO_UserAvatar extends GDO
 		return array(
 			GDT_User::make('avt_user_id')->primary(),
 		    GDT_Object::make('avt_avatar_id')->table(GDO_Avatar::table())->notNull(),
-			GDT_EditedAt::make('avt_edited_at'),
+			GDT_CreatedAt::make('avt_created_at'),
 		);
 	}
 	
