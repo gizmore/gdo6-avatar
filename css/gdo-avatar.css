@@ -3,6 +3,7 @@
 	height: 32px;
 	border-radius: 50%;
 	display: inline-block;
+	vertical-align: middle;
 }
 .gdo-avatar img {
 	width: 32px;
