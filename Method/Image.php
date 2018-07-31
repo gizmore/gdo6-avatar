@@ -8,6 +8,8 @@ use GDO\File\Method\GetFile;
 
 final class Image extends Method
 {
+    public function saveLastUrl() { return false; }
+    
 	public function execute()
 	{
 		if (Common::getRequestInt('file') == 0)
