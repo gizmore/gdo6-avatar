@@ -5,6 +5,7 @@ use GDO\Core\GDO_Module;
 use GDO\User\GDO_User;
 use GDO\UI\GDT_Link;
 use GDO\UI\GDT_Bar;
+use GDO\DB\GDT_Checkbox;
 
 final class Module_Avatar extends GDO_Module
 {
@@ -14,6 +15,17 @@ final class Module_Avatar extends GDO_Module
 	public function onLoadLanguage() { return $this->loadLanguage('lang/avatar'); }
 	public function getClasses() { return ['GDO\Avatar\GDO_Avatar','GDO\Avatar\GDO_UserAvatar']; }
 	public function onIncludeScripts() { $this->addCSS('css/gdo-avatar.css'); }
+	
+	##############
+	### Config ###
+	##############
+	public function getConfig()
+	{
+	    return array(
+	        GDT_Checkbox::make('avatar_guests')->initial('0'),
+	    );
+	}
+	public function cfgGuestAvatars() { return $this->getConfigValue('avatar_guests'); }
 	
 	##############
 	### Navbar ###

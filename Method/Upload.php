@@ -12,10 +12,14 @@ use GDO\UI\GDT_Button;
 use GDO\User\GDO_User;
 use GDO\File\GDT_ImageFile;
 use GDO\Core\Application;
+use GDO\Avatar\Module_Avatar;
 
 final class Upload extends MethodForm
 {
-	public function createForm(GDT_Form $form)
+    public function isUserRequired() { return true; }
+    public function isGuestAllowed() { return Module_Avatar::instance()->cfgGuestAvatars(); }
+    
+    public function createForm(GDT_Form $form)
 	{
 		$form->addField(GDT_ImageFile::make('avatar_image')->minfiles(1)->action($this->href()));
 		$form->addField(GDT_Submit::make()->label('btn_upload'));

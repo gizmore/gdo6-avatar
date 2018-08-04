@@ -10,6 +10,7 @@ use GDO\Form\GDT_Submit;
 use GDO\Form\MethodForm;
 use GDO\UI\GDT_Button;
 use GDO\User\GDO_User;
+use GDO\Avatar\Module_Avatar;
 /**
  * Set an avatar picture out of possible choices.
  * @author gizmore
@@ -17,6 +18,7 @@ use GDO\User\GDO_User;
 final class Set extends MethodForm
 {
 	public function isUserRequired() { return true; }
+	public function isGuestAllowed() { return Module_Avatar::instance()->cfgGuestAvatars(); }
 	
 	public function createForm(GDT_Form $form)
 	{
