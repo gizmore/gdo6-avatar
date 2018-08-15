@@ -22,9 +22,8 @@ class GWS_AvatarUpload extends GWS_CommandForm
 	public function afterReplySuccess(GWS_Message $msg)
 	{
 		$user = $msg->user();
+		$user->tempUnset('gdo_avatar');
 		$avatarid = GDO_Avatar::forUser($user)->getFileID();
-		
-		GWS_Global::recacheUser($user->getID());
 		
 		$this->sendNotifications($msg, $user->getID(), $avatarid);
 	}
