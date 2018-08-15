@@ -16,10 +16,10 @@ use GDO\Avatar\Module_Avatar;
 
 final class Upload extends MethodForm
 {
-    public function isUserRequired() { return true; }
-    public function isGuestAllowed() { return Module_Avatar::instance()->cfgGuestAvatars(); }
-    
-    public function createForm(GDT_Form $form)
+	public function isUserRequired() { return true; }
+	public function isGuestAllowed() { return Module_Avatar::instance()->cfgGuestAvatars(); }
+	
+	public function createForm(GDT_Form $form)
 	{
 		$form->addField(GDT_ImageFile::make('avatar_image')->minfiles(1)->action($this->href()));
 		$form->addField(GDT_Submit::make()->label('btn_upload'));
@@ -29,12 +29,12 @@ final class Upload extends MethodForm
 	
 	public function formValidated(GDT_Form $form)
 	{
-	    $avatar = GDO_Avatar::blank(['avatar_file_id'=>$form->getFormVar('avatar_image')])->insert();
-	    GDO_UserAvatar::updateAvatar(GDO_User::current(), $avatar->getID());
-	    if (Application::instance()->isAjax())
-	    {
-	        return $this->message('msg_avatar_uploaded');
-	    }
+		$avatar = GDO_Avatar::blank(['avatar_file_id'=>$form->getFormVar('avatar_image')])->insert();
+		GDO_UserAvatar::updateAvatar(GDO_User::current(), $avatar->getID());
+		if (Application::instance()->isAjax())
+		{
+			return $this->message('msg_avatar_uploaded');
+		}
 		return $this->message('msg_avatar_uploaded')->add(Website::redirectMessage(href('Avatar', 'Set')));
 	}
 }

@@ -31,7 +31,7 @@ final class GDT_Avatar extends GDT_ObjectSelect
 	
 // 	public function getValue()
 // 	{
-// 	    return GDO_Avatar::getById($this->getVar());
+// 		return GDO_Avatar::getById($this->getVar());
 // 	}
 	
 // 	public function validate($value)
@@ -48,7 +48,7 @@ final class GDT_Avatar extends GDT_ObjectSelect
 	}
 	public function avatarChoices()
 	{
-	    $query = GDO_Avatar::table()->select();
+		$query = GDO_Avatar::table()->select();
 		$result = $query->joinObject('avatar_file_id')->select('gdo_avatar.*, gdo_file.*')->where("avatar_public OR avatar_created_by={$this->user->getID()}")->exec();
 		$choices = array();
 		while ($gwfAvatar = $result->fetchObject())

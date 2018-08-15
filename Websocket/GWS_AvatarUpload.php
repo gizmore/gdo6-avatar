@@ -17,23 +17,23 @@ use GDO\Avatar\GDO_Avatar;
  **/
 class GWS_AvatarUpload extends GWS_CommandForm
 {
-    public function getMethod() { return Upload::make(); }
-    
-    public function afterReplySuccess(GWS_Message $msg)
-    {
-        $user = $msg->user();
-        $avatarid = GDO_Avatar::forUser($user)->getFileID();
-        
-        GWS_Global::recacheUser($user->getID());
-        
-        $this->sendNotifications($msg, $user->getID(), $avatarid);
-    }
-    
-    protected function sendNotifications(GWS_Message $msg, $userid, $avatarid)
-    {
-        $payload = $msg->wrCmd(0x0402).$msg->wr32($userid).$msg->wr32($avatarid);
-        GWS_Global::broadcastBinary($payload);
-    }
+	public function getMethod() { return Upload::make(); }
+	
+	public function afterReplySuccess(GWS_Message $msg)
+	{
+		$user = $msg->user();
+		$avatarid = GDO_Avatar::forUser($user)->getFileID();
+		
+		GWS_Global::recacheUser($user->getID());
+		
+		$this->sendNotifications($msg, $user->getID(), $avatarid);
+	}
+	
+	protected function sendNotifications(GWS_Message $msg, $userid, $avatarid)
+	{
+		$payload = $msg->wrCmd(0x0402).$msg->wr32($userid).$msg->wr32($avatarid);
+		GWS_Global::broadcastBinary($payload);
+	}
 }
 
 // Register command

@@ -17,7 +17,7 @@ final class GDO_UserAvatar extends GDO
 	{
 		return array(
 			GDT_User::make('avt_user_id')->primary(),
-		    GDT_Object::make('avt_avatar_id')->table(GDO_Avatar::table())->notNull(),
+			GDT_Object::make('avt_avatar_id')->table(GDO_Avatar::table())->notNull(),
 			GDT_CreatedAt::make('avt_created_at'),
 		);
 	}
@@ -27,11 +27,11 @@ final class GDO_UserAvatar extends GDO
 		$user->tempUnset('gdo_avatar');
 		if ($avatarId > 0)
 		{
-		    GDO_UserAvatar::blank(['avt_user_id'=>$user->getID(), 'avt_avatar_id'=>$avatarId])->replace();
+			GDO_UserAvatar::blank(['avt_user_id'=>$user->getID(), 'avt_avatar_id'=>$avatarId])->replace();
 		}
 		else
 		{
-		    GDO_UserAvatar::table()->deleteWhere('avt_user_id='.$user->getID())->exec();
+			GDO_UserAvatar::table()->deleteWhere('avt_user_id='.$user->getID())->exec();
 		}
 		$user->recache();
 		return true;

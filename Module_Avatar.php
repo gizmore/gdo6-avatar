@@ -21,9 +21,9 @@ final class Module_Avatar extends GDO_Module
 	##############
 	public function getConfig()
 	{
-	    return array(
-	        GDT_Checkbox::make('avatar_guests')->initial('0'),
-	    );
+		return array(
+			GDT_Checkbox::make('avatar_guests')->initial('0'),
+		);
 	}
 	public function cfgGuestAvatars() { return $this->getConfigValue('avatar_guests'); }
 	
@@ -32,10 +32,10 @@ final class Module_Avatar extends GDO_Module
 	##############
 	public function hookRightBar(GDT_Bar $navbar)
 	{
-	    $user = GDO_User::current();
-	    if (!$user->isGhost())
-	    {
-	        $icon = GDT_Avatar::make('avatar')->user($user)->gdo(GDO_Avatar::forUser($user))->renderCell();
+		$user = GDO_User::current();
+		if (!$user->isGhost())
+		{
+			$icon = GDT_Avatar::make('avatar')->user($user)->gdo(GDO_Avatar::forUser($user))->renderCell();
 			$navbar->addField(GDT_Link::make('btn_avatar')->rawIcon($icon)->href(href('Avatar', 'Set')));
 		}
 	}
