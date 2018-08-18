@@ -27,9 +27,37 @@ class GDO_Avatar extends GDO
 	public function getID() { return $this->getVar('avatar_id'); }
 	public function getFileID() { return $this->getVar('avatar_file_id'); }
 	
-	public static function defaultAvatar()
+	public static function defaultAvatar(GDO_User $user)
 	{
-		return self::table()->blank(['avatar_id'=>'0']);
+		return self::table()->blank(array(
+			'avatar_id'=>'0',
+			'avatar_file_id' => self::getBestDefaultAvatar($user),
+		));
+	}
+	
+	public static function getBestDefaultAvatar(GDO_User $user)
+	{
+		$keys = ['avatar_image_guest']; # Last resort
+		if ($user->isMember())
+		{
+			$keys[] = 'avatar_image_member';
+			switch ($user->getGender())
+			{
+				case 'male': $keys[] = 'avatar_image_male'; break;
+				case 'female': $keys[] = 'avatar_image_female'; break;
+			}
+		}
+		
+		$module = Module_Avatar::instance();
+		foreach (array_reverse($keys) as $key)
+		{
+			if ($file = $module->getConfigValue($key))
+			{
+				return $file->getID();
+			}
+		}
+		
+		return '0';
 	}
 	
 	/**
@@ -48,10 +76,10 @@ class GDO_Avatar extends GDO
 			$query->where('avt_user_id='.$user->getID())->first();
 			if (!($avatar = $query->exec()->fetchAs($avatarTable)))
 			{
-				$avatar = self::defaultAvatar();
+				$avatar = self::defaultAvatar($user);
 			}
 			$user->tempSet('gdo_avatar', $avatar);
-			$user->recache();
+// 			$user->recache();
 		}
 		return $avatar;
 	}

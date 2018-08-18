@@ -6,6 +6,8 @@ use GDO\User\GDO_User;
 use GDO\UI\GDT_Link;
 use GDO\UI\GDT_Bar;
 use GDO\DB\GDT_Checkbox;
+use GDO\File\GDT_ImageFile;
+use GDO\File\GDO_File;
 
 final class Module_Avatar extends GDO_Module
 {
@@ -23,6 +25,10 @@ final class Module_Avatar extends GDO_Module
 	{
 		return array(
 			GDT_Checkbox::make('avatar_guests')->initial('0'),
+			GDT_ImageFile::make('avatar_image_guest')->previewHREF(href('Avatar', 'Image', '&file=')),
+			GDT_ImageFile::make('avatar_image_member')->previewHREF(href('Avatar', 'Image', '&file=')),
+			GDT_ImageFile::make('avatar_image_male')->previewHREF(href('Avatar', 'Image', '&file=')),
+			GDT_ImageFile::make('avatar_image_female')->previewHREF(href('Avatar', 'Image', '&file=')),
 		);
 	}
 	public function cfgGuestAvatars() { return $this->getConfigValue('avatar_guests'); }
@@ -39,4 +45,25 @@ final class Module_Avatar extends GDO_Module
 			$navbar->addField(GDT_Link::make('btn_avatar')->rawIcon($icon)->href(href('Avatar', 'Set')));
 		}
 	}
+	
+	###############
+	### Install ###
+	###############
+	public function onInstall()
+	{
+		if (!($image = $this->getConfigValue('avatar_image_guest')))
+		{
+			$image = GDO_File::fromPath('default.jpeg', $this->filePath('tpl/img/default.jpeg'))->copy();
+			$this->saveConfigVar('avatar_image_guest', $image->getID());
+		}
+	}
+	
+	############
+	### Hook ###
+	############
+	public function hookAccountChanged(GDO_User $user)
+	{
+		$user->tempUnset('gdo_avatar');
+	}
+
 }

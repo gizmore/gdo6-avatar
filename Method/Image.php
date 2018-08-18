@@ -6,6 +6,9 @@ use GDO\Core\Method;
 use GDO\Util\Common;
 use GDO\File\Method\GetFile;
 
+/**
+ * @deprecated
+ */
 final class Image extends Method
 {
 	public function saveLastUrl() { return false; }
