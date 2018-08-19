@@ -2,7 +2,6 @@
 use GDO\Websocket\Server\GWS_CommandForm;
 use GDO\Avatar\Method\Upload;
 use GDO\Websocket\Server\GWS_Commands;
-use GDO\Core\Logger;
 use GDO\Websocket\Server\GWS_Global;
 use GDO\Websocket\Server\GWS_Message;
 use GDO\Avatar\GDO_Avatar;
