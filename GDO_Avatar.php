@@ -7,6 +7,7 @@ use GDO\DB\GDT_CreatedBy;
 use GDO\File\GDT_File;
 use GDO\DB\GDT_Checkbox;
 use GDO\User\GDO_User;
+use GDO\File\GDT_ImageFile;
 /**
  * An avatar image file.
  * @author gizmore
@@ -18,7 +19,7 @@ class GDO_Avatar extends GDO
 	{
 		return array(
 			GDT_AutoInc::make('avatar_id'),
-			GDT_File::make('avatar_file_id')->notNull(),
+			GDT_ImageFile::make('avatar_file_id')->notNull()->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 812),
 			GDT_CreatedBy::make('avatar_created_by')->notNull(),
 			GDT_Checkbox::make('avatar_public')->initial('0'),
 		);
