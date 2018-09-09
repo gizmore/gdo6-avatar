@@ -4,7 +4,6 @@ namespace GDO\Avatar;
 use GDO\Core\GDO;
 use GDO\DB\GDT_AutoInc;
 use GDO\DB\GDT_CreatedBy;
-use GDO\File\GDT_File;
 use GDO\DB\GDT_Checkbox;
 use GDO\User\GDO_User;
 use GDO\File\GDT_ImageFile;

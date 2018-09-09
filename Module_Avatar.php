@@ -33,6 +33,11 @@ final class Module_Avatar extends GDO_Module
 	}
 	public function cfgGuestAvatars() { return $this->getConfigValue('avatar_guests'); }
 	
+	/**
+	 * @return GDT_ImageFile
+	 */
+	public function cfgColAvatarGuest() { return $this->getConfigColumn('avatar_image_guest'); }
+	
 	##############
 	### Navbar ###
 	##############
@@ -53,7 +58,9 @@ final class Module_Avatar extends GDO_Module
 	{
 		if (!($image = $this->getConfigValue('avatar_image_guest')))
 		{
-			$image = GDO_File::fromPath('default.jpeg', $this->filePath('tpl/img/default.jpeg'))->copy();
+			$image = GDO_File::fromPath('default.jpeg', $this->filePath('tpl/img/default.jpeg'))->insert()->copy();
+			$column = $this->cfgColAvatarGuest();
+			$column->createScaledVersions($image);
 			$this->saveConfigVar('avatar_image_guest', $image->getID());
 		}
 	}
