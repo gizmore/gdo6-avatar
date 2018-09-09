@@ -21,7 +21,7 @@ final class Upload extends MethodForm
 	
 	public function createForm(GDT_Form $form)
 	{
-		$form->addField(GDT_ImageFile::make('avatar_image')->minfiles(1)->action($this->href()));
+		$form->addField(GDO_Avatar::table()->gdoColumn('avatar_file_id')->action($this->href()));
 		$form->addField(GDT_Submit::make()->label('btn_upload'));
 		$form->addField(GDT_AntiCSRF::make());
 		$form->addField(GDT_Button::make('btn_set_avatar')->href(href('Avatar', 'Set')));
@@ -29,7 +29,7 @@ final class Upload extends MethodForm
 	
 	public function formValidated(GDT_Form $form)
 	{
-		$avatar = GDO_Avatar::blank(['avatar_file_id'=>$form->getFormVar('avatar_image')])->insert();
+		$avatar = GDO_Avatar::blank(['avatar_file_id'=>$form->getFormVar('avatar_file_id')])->insert();
 		GDO_UserAvatar::updateAvatar(GDO_User::current(), $avatar->getID());
 		if (Application::instance()->isAjax())
 		{
