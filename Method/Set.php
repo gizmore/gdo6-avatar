@@ -38,7 +38,7 @@ final class Set extends MethodForm
 	{
 		if ($this->getForm()->validated)
 		{
-			GDT_Hook::call('AvatarSet', GDO_User::current());
+			GDT_Hook::callWithIPC('AvatarSet', GDO_User::current());
 		}
 	}
 }
