@@ -66,6 +66,11 @@ class GDO_Avatar extends GDO
 	 */
 	public static function forUser(GDO_User $user)
 	{
+		if (!$user->isPersisted())
+		{
+			return self::defaultAvatar($user);
+		}
+		
 		if (!($avatar = $user->tempGet('gdo_avatar')))
 		{
 			$avatarTable = self::table();

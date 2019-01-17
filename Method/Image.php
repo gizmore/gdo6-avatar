@@ -7,7 +7,14 @@ use GDO\Util\Common;
 use GDO\File\Method\GetFile;
 
 /**
- * @deprecated
+ * Get an avatar image.
+ * Avatar images do not have any permission checking.
+ * 
+ * TODO: better error handling for non existing images.
+ * 
+ * @version 6.09
+ * @author gizmore
+ * @see GetFile
  */
 final class Image extends Method
 {
