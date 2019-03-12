@@ -30,7 +30,9 @@ final class Set extends MethodForm
 	
 	public function formValidated(GDT_Form $form)
 	{
-		GDO_UserAvatar::updateAvatar(GDO_User::current(), $form->getFormVar('avt_avatar_id'));
+		$user = GDO_User::current();
+		GDO_UserAvatar::updateAvatar($user, $form->getFormVar('avt_avatar_id'));
+		$user->recache();
 		return $this->message('msg_avatar_set')->add($this->renderPage());
 	}
 	

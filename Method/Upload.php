@@ -29,8 +29,10 @@ final class Upload extends MethodForm
 	
 	public function formValidated(GDT_Form $form)
 	{
+		$user = GDO_User::current();
 		$avatar = GDO_Avatar::blank(['avatar_file_id'=>$form->getFormVar('avatar_file_id')])->insert();
-		GDO_UserAvatar::updateAvatar(GDO_User::current(), $avatar->getID());
+		GDO_UserAvatar::updateAvatar($user, $avatar->getID());
+		$user->recache();
 		if (Application::instance()->isAjax())
 		{
 			return $this->message('msg_avatar_uploaded');
