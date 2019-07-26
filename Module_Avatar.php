@@ -14,6 +14,7 @@ final class Module_Avatar extends GDO_Module
 	##############
 	### Module ###
 	##############
+	public function getDependencies() { return ['File']; }
 	public function onLoadLanguage() { return $this->loadLanguage('lang/avatar'); }
 	public function getClasses() { return ['GDO\Avatar\GDO_Avatar','GDO\Avatar\GDO_UserAvatar']; }
 	public function onIncludeScripts() { $this->addCSS('css/gdo-avatar.css'); }
