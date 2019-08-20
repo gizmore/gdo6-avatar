@@ -9,7 +9,6 @@ final class GDT_Avatar extends GDT_ObjectSelect
 	public function __construct()
 	{
 		$this->table(GDO_Avatar::table());
-// 		$this->currentUser();
 	}
 	
 	/**
@@ -20,6 +19,7 @@ final class GDT_Avatar extends GDT_ObjectSelect
 	{
 		return $this->user(GDO_User::current());
 	}
+	
 	public function user(GDO_User $user)
 	{
 		$this->user = $user;
@@ -28,16 +28,6 @@ final class GDT_Avatar extends GDT_ObjectSelect
 		$this->emptyLabel = t('choice_no_avatar');
 		return $this->label('avatar');
 	}
-	
-// 	public function getValue()
-// 	{
-// 		return GDO_Avatar::getById($this->getVar());
-// 	}
-	
-// 	public function validate($value)
-// 	{
-// 		return parent::validate($value);
-// 	}
 	
 	public function initChoices()
 	{
@@ -58,14 +48,6 @@ final class GDT_Avatar extends GDT_ObjectSelect
 		return $choices;
 	}
 	
-// 	public function renderForm()
-// 	{
-// 		if (!$this->choices)
-// 		{
-// 			$this->choices($this->avatarChoices());
-// 		}
-// 		return Module_Avatar::instance()->templatePHP('form/avatar.php', ['field'=>$this]);
-// 	}
 	public function renderChoice($avatar)
 	{
 		$gdo = $this->gdo;
