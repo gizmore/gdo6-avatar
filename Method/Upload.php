@@ -1,6 +1,8 @@
 <?php
 namespace GDO\Avatar\Method;
 
+use GDO\Account\Module_Account;
+use GDO\Account\Method\Settings;
 use GDO\Avatar\GDO_Avatar;
 use GDO\Avatar\GDO_UserAvatar;
 use GDO\Core\Website;
@@ -39,4 +41,12 @@ final class Upload extends MethodForm
 		}
 		return $this->message('msg_avatar_uploaded')->add(Website::redirectMessage(href('Avatar', 'Set')));
 	}
+	
+	public function execute()
+	{
+		$tabs = Module_Account::instance()->renderAccountTabs();
+		$nav = Settings::make()->navModules();
+		return $tabs->add($nav)->add(parent::execute());
+	}
+	
 }

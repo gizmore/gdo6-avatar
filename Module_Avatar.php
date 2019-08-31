@@ -18,7 +18,7 @@ final class Module_Avatar extends GDO_Module
 	public function onLoadLanguage() { return $this->loadLanguage('lang/avatar'); }
 	public function getClasses() { return ['GDO\Avatar\GDO_Avatar','GDO\Avatar\GDO_UserAvatar']; }
 	public function onIncludeScripts() { $this->addCSS('css/gdo-avatar.css'); }
-	
+	public function getUserSettingsURL() { return href('Avatar', 'Set'); }
 	##############
 	### Config ###
 	##############
@@ -42,15 +42,15 @@ final class Module_Avatar extends GDO_Module
 	##############
 	### Navbar ###
 	##############
-	public function hookRightBar(GDT_Bar $navbar)
-	{
-		$user = GDO_User::current();
-		if (!$user->isGhost())
-		{
-			$icon = GDT_Avatar::make('avatar')->user($user)->gdo(GDO_Avatar::forUser($user))->renderCell();
-			$navbar->addField(GDT_Link::make('btn_avatar')->addClass('gdo-sidebar-avatar')->rawIcon($icon)->href(href('Avatar', 'Set')));
-		}
-	}
+// 	public function hookRightBar(GDT_Bar $navbar)
+// 	{
+// 		$user = GDO_User::current();
+// 		if (!$user->isGhost())
+// 		{
+// 			$icon = GDT_Avatar::make('avatar')->user($user)->gdo(GDO_Avatar::forUser($user))->renderCell();
+// 			$navbar->addField(GDT_Link::make('btn_avatar')->addClass('gdo-sidebar-avatar')->rawIcon($icon)->href(href('Avatar', 'Set')));
+// 		}
+// 	}
 	
 	###############
 	### Install ###

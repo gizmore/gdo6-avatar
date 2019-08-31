@@ -11,6 +11,8 @@ use GDO\Form\MethodForm;
 use GDO\UI\GDT_Button;
 use GDO\User\GDO_User;
 use GDO\Avatar\Module_Avatar;
+use GDO\Account\Module_Account;
+use GDO\Account\Method\Settings;
 /**
  * Set an avatar picture out of possible choices.
  * @author gizmore
@@ -42,5 +44,12 @@ final class Set extends MethodForm
 		{
 			GDT_Hook::callWithIPC('AvatarSet', GDO_User::current());
 		}
+	}
+	
+	public function execute()
+	{
+		$tabs = Module_Account::instance()->renderAccountTabs();
+		$nav = Settings::make()->navModules();
+		return $tabs->add($nav)->add(parent::execute());
 	}
 }
