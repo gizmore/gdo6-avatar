@@ -25,7 +25,7 @@ final class GDT_Avatar extends GDT_ObjectSelect
 		$this->user = $user;
 		$this->var = GDO_Avatar::forUser($user)->getID();
 		$this->var = $this->var > 0 ? $this->var : null;
-		$this->emptyLabel = t('choice_no_avatar');
+		$this->emptyLabel = 'choice_no_avatar';
 		return $this->label('avatar');
 	}
 	
