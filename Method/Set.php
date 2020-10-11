@@ -13,7 +13,7 @@ use GDO\User\GDO_User;
 use GDO\Avatar\Module_Avatar;
 use GDO\Account\Module_Account;
 use GDO\Account\Method\Settings;
-use GDO\Core\GDT_Response;
+use GDO\UI\GDT_HTML;
 /**
  * Set an avatar picture out of possible choices.
  * @author gizmore
@@ -25,6 +25,7 @@ final class Set extends MethodForm
 	
 	public function createForm(GDT_Form $form)
 	{
+	    $form->addField(GDT_HTML::make()->gdt(GDT_Avatar::make()->currentUser()->avatarSize(128))->css('margin-left', '32px'));
 		$form->addField(GDT_Avatar::make('avt_avatar_id')->currentUser());
 		$form->addField(GDT_Submit::make());
 		$form->addField(GDT_Button::make('btn_upload')->href(href('Avatar', 'Upload')));
@@ -51,7 +52,8 @@ final class Set extends MethodForm
 	{
 		$tabs = Module_Account::instance()->renderAccountTabs();
 		$nav = Settings::make()->navModules();
-		$avatar = GDT_Avatar::make()->currentUser();
-		return $tabs->add($nav)->add(GDT_Response::makeWith($avatar))->add(parent::execute());
+// 		$avatar = GDT_Avatar::make()->currentUser();
+// 		return $tabs->add($nav)->add(GDT_Response::makeWith($avatar))->add(parent::execute());
+		return $tabs->add($nav)->add(parent::execute());
 	}
 }

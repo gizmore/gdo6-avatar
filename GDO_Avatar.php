@@ -100,9 +100,9 @@ class GDO_Avatar extends GDO
 		return $gdoType->user($user)->gdo($this);
 	}
 	
-	public static function renderAvatar(GDO_User $user)
+	public static function renderAvatar(GDO_User $user, $avatarSize=32)
 	{
-		return self::forUser($user)->getGDOAvatar($user)->renderCell();
+		return self::forUser($user)->getGDOAvatar($user)->avatarSize($avatarSize)->renderCell();
 	}
 	
 }

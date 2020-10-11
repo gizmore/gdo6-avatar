@@ -29,6 +29,13 @@ final class GDT_Avatar extends GDT_ObjectSelect
 		return $this->label('avatar');
 	}
 	
+	public $avatarSize = 38;
+	public function avatarSize($avatarSize)
+	{
+	    $this->avatarSize = $avatarSize;
+	    return $this;
+	}
+	
 	public function initChoices()
 	{
 		if (!$this->choices)
