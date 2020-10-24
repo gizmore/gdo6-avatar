@@ -8,6 +8,7 @@ final class GDT_Avatar extends GDT_ObjectSelect
 {
 	public function __construct()
 	{
+	    $this->icon = 'image';
 		$this->table(GDO_Avatar::table());
 	}
 	
