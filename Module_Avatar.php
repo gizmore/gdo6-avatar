@@ -3,12 +3,20 @@ namespace GDO\Avatar;
 
 use GDO\Core\GDO_Module;
 use GDO\User\GDO_User;
-use GDO\UI\GDT_Link;
-use GDO\UI\GDT_Bar;
 use GDO\DB\GDT_Checkbox;
 use GDO\File\GDT_ImageFile;
 use GDO\File\GDO_File;
 
+/**
+ * Avatar module.
+ * Features default avatar.
+ * 
+ * @author gizmore
+ * @version 6.10
+ * @since 6.02
+ * 
+ * @see GDT_ImageFile
+ */
 final class Module_Avatar extends GDO_Module
 {
 	##############
@@ -19,6 +27,7 @@ final class Module_Avatar extends GDO_Module
 	public function getClasses() { return ['GDO\Avatar\GDO_Avatar','GDO\Avatar\GDO_UserAvatar']; }
 	public function onIncludeScripts() { $this->addCSS('css/gdo-avatar.css'); }
 	public function getUserSettingsURL() { return href('Avatar', 'Set'); }
+
 	##############
 	### Config ###
 	##############
@@ -26,10 +35,10 @@ final class Module_Avatar extends GDO_Module
 	{
 		return array(
 			GDT_Checkbox::make('avatar_guests')->initial('0'),
-			GDT_ImageFile::make('avatar_image_guest')->previewHREF(href('Avatar', 'Image', '&file='))->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 812),
-			GDT_ImageFile::make('avatar_image_member')->previewHREF(href('Avatar', 'Image', '&file='))->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 812),
-			GDT_ImageFile::make('avatar_image_male')->previewHREF(href('Avatar', 'Image', '&file='))->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 812),
-			GDT_ImageFile::make('avatar_image_female')->previewHREF(href('Avatar', 'Image', '&file='))->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 812),
+		    GDT_ImageFile::make('avatar_image_guest')->previewHREF(href('Avatar', 'Image', '&file='))->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 375),
+		    GDT_ImageFile::make('avatar_image_member')->previewHREF(href('Avatar', 'Image', '&file='))->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 375),
+		    GDT_ImageFile::make('avatar_image_male')->previewHREF(href('Avatar', 'Image', '&file='))->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 375),
+		    GDT_ImageFile::make('avatar_image_female')->previewHREF(href('Avatar', 'Image', '&file='))->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 375),
 		);
 	}
 	public function cfgGuestAvatars() { return $this->getConfigValue('avatar_guests'); }
@@ -38,19 +47,6 @@ final class Module_Avatar extends GDO_Module
 	 * @return GDT_ImageFile
 	 */
 	public function cfgColAvatarGuest() { return $this->getConfigColumn('avatar_image_guest'); }
-	
-	##############
-	### Navbar ###
-	##############
-// 	public function hookRightBar(GDT_Bar $navbar)
-// 	{
-// 		$user = GDO_User::current();
-// 		if (!$user->isGhost())
-// 		{
-// 			$icon = GDT_Avatar::make('avatar')->user($user)->gdo(GDO_Avatar::forUser($user))->renderCell();
-// 			$navbar->addField(GDT_Link::make('btn_avatar')->addClass('gdo-sidebar-avatar')->rawIcon($icon)->href(href('Avatar', 'Set')));
-// 		}
-// 	}
 	
 	###############
 	### Install ###

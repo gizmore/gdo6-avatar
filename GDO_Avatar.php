@@ -18,7 +18,7 @@ class GDO_Avatar extends GDO
 	{
 		return array(
 			GDT_AutoInc::make('avatar_id'),
-			GDT_ImageFile::make('avatar_file_id')->notNull()->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 812),
+		    GDT_ImageFile::make('avatar_file_id')->notNull()->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 375),
 			GDT_CreatedBy::make('avatar_created_by')->notNull(),
 			GDT_Checkbox::make('avatar_public')->initial('0'),
 		);
