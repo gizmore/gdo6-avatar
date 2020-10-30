@@ -6,9 +6,12 @@ use GDO\DB\GDT_ObjectSelect;
 
 final class GDT_Avatar extends GDT_ObjectSelect
 {
+    public function defaultLabel() { return $this->label('avatar'); }
+    
 	public function __construct()
 	{
 	    $this->icon = 'image';
+		$this->emptyLabel = 'choice_no_avatar';
 		$this->table(GDO_Avatar::table());
 	}
 	
@@ -24,10 +27,9 @@ final class GDT_Avatar extends GDT_ObjectSelect
 	public function user(GDO_User $user)
 	{
 		$this->user = $user;
-		$this->var = GDO_Avatar::forUser($user)->getID();
-		$this->var = $this->var > 0 ? $this->var : null;
-		$this->emptyLabel = 'choice_no_avatar';
-		return $this->label('avatar');
+		$this->gdo = GDO_Avatar::forUser($user);
+		$this->var = $this->gdo->getID();
+		return $this;
 	}
 	
 	public $avatarSize = 38;
@@ -59,8 +61,10 @@ final class GDT_Avatar extends GDT_ObjectSelect
 	public function renderChoice($avatar)
 	{
 		$gdo = $this->gdo;
+		$var = $this->var;
 		$html = Module_Avatar::instance()->templatePHP('choice/avatar.php', ['field'=>$this->gdo($avatar)]);
 		$this->gdo = $gdo;
+		$this->var = $var;
 		return $html;
 	}
 
