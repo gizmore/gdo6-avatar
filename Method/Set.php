@@ -51,9 +51,9 @@ final class Set extends MethodForm
 	
 	public function execute()
 	{
-		$tabs = Module_Account::instance()->renderAccountTabs();
-		$nav = Settings::make()->navModules();
-		return $tabs->add($nav)->add(parent::execute());
+		Module_Account::instance()->renderAccountTabs();
+		Settings::make()->navModules();
+		return parent::execute();
 	}
 	
 }

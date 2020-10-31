@@ -42,11 +42,10 @@ final class Upload extends MethodForm
 		return $this->message('msg_avatar_uploaded')->add(Website::redirectMessage(href('Avatar', 'Set')));
 	}
 	
-	public function execute()
+	public function beforeExecute()
 	{
-		$tabs = Module_Account::instance()->renderAccountTabs();
-		$nav = Settings::make()->navModules();
-		return $tabs->add($nav)->add(parent::execute());
+		Module_Account::instance()->renderAccountTabs();
+		Settings::make()->navModules();
 	}
 	
 }
