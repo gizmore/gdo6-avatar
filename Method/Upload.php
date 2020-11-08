@@ -12,10 +12,14 @@ use GDO\Form\GDT_Submit;
 use GDO\Form\MethodForm;
 use GDO\UI\GDT_Button;
 use GDO\User\GDO_User;
-use GDO\File\GDT_ImageFile;
-use GDO\Core\Application;
 use GDO\Avatar\Module_Avatar;
 
+/**
+ * Upload an avatar image.
+ * @author gizmore
+ * @version 6.10
+ * @since 6.02
+ */
 final class Upload extends MethodForm
 {
 	public function isUserRequired() { return true; }
@@ -35,11 +39,7 @@ final class Upload extends MethodForm
 		$avatar = GDO_Avatar::blank(['avatar_file_id'=>$form->getFormVar('avatar_file_id')])->insert();
 		GDO_UserAvatar::updateAvatar($user, $avatar->getID());
 		$user->recache();
-		if (Application::instance()->isAjax())
-		{
-			return $this->message('msg_avatar_uploaded');
-		}
-		return $this->message('msg_avatar_uploaded')->add(Website::redirectMessage(href('Avatar', 'Set')));
+		Website::redirectMessage('msg_avatar_uploaded', null, href('Avatar', 'Set'));
 	}
 	
 	public function beforeExecute()
