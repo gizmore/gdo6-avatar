@@ -39,6 +39,7 @@ final class Upload extends MethodForm
 		$avatar = GDO_Avatar::blank(['avatar_file_id'=>$form->getFormVar('avatar_file_id')])->insert();
 		GDO_UserAvatar::updateAvatar($user, $avatar->getID());
 		$user->recache();
+		$this->resetForm();
 		Website::redirectMessage('msg_avatar_uploaded', null, href('Avatar', 'Set'));
 	}
 	
