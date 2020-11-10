@@ -26,7 +26,7 @@ final class Set extends MethodForm
 	
 	public function createForm(GDT_Form $form)
 	{
-	    $form->addField(GDT_HTML::make('preview')->gdt(GDT_Avatar::make()->currentUser()->avatarSize(128))->css('margin-left', '32px'));
+	    $form->addField(GDT_HTML::make('preview')->gdt(GDT_Avatar::make()->currentUser()->imageSize(128))->css('margin-left', '32px')->css('margin-top', '16px'));
 		$form->addField(GDT_Avatar::make('avt_avatar_id')->currentUser());
 		$form->addField(GDT_Submit::make()->label('btn_set'));
 		$form->addField(GDT_Button::make('btn_upload')->href(href('Avatar', 'Upload'))->icon('upload'));

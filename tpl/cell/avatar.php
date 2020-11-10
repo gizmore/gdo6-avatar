@@ -2,7 +2,7 @@
 use GDO\Avatar\GDO_Avatar;
 use GDO\Avatar\GDT_Avatar;
 /** @var $field GDT_Avatar **/
-$az = $field->avatarSize;
+$az = $field->imageWidth;
 ?>
 <span
  class="gdo-avatar <?=$field->user->getGender()?>"

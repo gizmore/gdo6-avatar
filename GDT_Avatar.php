@@ -3,9 +3,12 @@ namespace GDO\Avatar;
 
 use GDO\User\GDO_User;
 use GDO\DB\GDT_ObjectSelect;
+use GDO\UI\WithImageSize;
 
 final class GDT_Avatar extends GDT_ObjectSelect
 {
+    use WithImageSize;
+    
     public function defaultLabel() { return $this->label('avatar'); }
     
 	public function __construct()
@@ -30,13 +33,6 @@ final class GDT_Avatar extends GDT_ObjectSelect
 		$this->gdo = GDO_Avatar::forUser($user);
 		$this->var = $this->gdo->getID();
 		return $this;
-	}
-	
-	public $avatarSize = 38;
-	public function avatarSize($avatarSize)
-	{
-	    $this->avatarSize = $avatarSize;
-	    return $this;
 	}
 	
 	public function initChoices()

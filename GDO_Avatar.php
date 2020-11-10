@@ -84,7 +84,7 @@ class GDO_Avatar extends GDO
 				$avatar = self::defaultAvatar($user);
 			}
 			$user->tempSet('gdo_avatar', $avatar);
-// 			$user->recache();
+			$user->recache();
 		}
 		return $avatar;
 	}
@@ -100,9 +100,9 @@ class GDO_Avatar extends GDO
 		return $gdoType->user($user)->gdo($this);
 	}
 	
-	public static function renderAvatar(GDO_User $user, $avatarSize=32)
+	public static function renderAvatar(GDO_User $user, $size=32)
 	{
-		return self::forUser($user)->getGDOAvatar($user)->avatarSize($avatarSize)->renderCell();
+		return self::forUser($user)->getGDOAvatar($user)->imageSize($size)->renderCell();
 	}
 	
 }
