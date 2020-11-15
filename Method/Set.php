@@ -39,6 +39,7 @@ final class Set extends MethodForm
 		$user = GDO_User::current();
 		GDO_UserAvatar::updateAvatar($user, $form->getFormVar('avt_avatar_id'));
 		$user->recache();
+		$this->resetForm();
 		return $this->message('msg_avatar_set')->add($this->renderPage());
 	}
 	
