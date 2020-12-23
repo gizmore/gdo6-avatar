@@ -11,7 +11,7 @@ final class GDT_Avatar extends GDT_ObjectSelect
     
     public function defaultLabel() { return $this->label('avatar'); }
     
-	public function __construct()
+	protected function __construct()
 	{
 	    $this->icon = 'image';
 		$this->emptyLabel = 'choice_no_avatar';
