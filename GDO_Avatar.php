@@ -16,12 +16,15 @@ class GDO_Avatar extends GDO
 	public function gdoCached() { return false; }
 	public function gdoColumns()
 	{
-		return array(
+		return [
 			GDT_AutoInc::make('avatar_id'),
-		    GDT_ImageFile::make('avatar_file_id')->notNull()->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 375),
+		    GDT_ImageFile::make('avatar_file_id')->notNull()->
+		      previewHREF(href('Avatar', 'Image', '&file='))->
+		      scaledVersion('icon', 96, 96)->
+		      scaledVersion('thumb', 375, 375),
 			GDT_CreatedBy::make('avatar_created_by')->notNull(),
 			GDT_Checkbox::make('avatar_public')->initial('0'),
-		);
+		];
 	}
 	
 	public function getID() { return $this->getVar('avatar_id'); }
@@ -29,10 +32,10 @@ class GDO_Avatar extends GDO
 	
 	public static function defaultAvatar(GDO_User $user)
 	{
-		return self::table()->blank(array(
+		return self::table()->blank([
 			'avatar_id'=>'0',
 			'avatar_file_id' => self::getBestDefaultAvatar($user),
-		));
+		]);
 	}
 	
 	public static function getBestDefaultAvatar(GDO_User $user)
