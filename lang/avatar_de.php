@@ -5,10 +5,10 @@ return array(
 'avatar_of' => '%s\'s Avatar',
 ###########
 'cfg_avatar_guests' => 'Erlaube Gast-Avatare',
-'cfg_avatar_image_guest' => 'Gast Avatar',
-'cfg_avatar_image_member' => 'Mitglieder Avatar',
-'cfg_avatar_image_male' => 'Männlicher Avatar',
-'cfg_avatar_image_female' => 'Default female avatar',
+'cfg_avatar_image_guest' => 'Standard Gast Avatar',
+'cfg_avatar_image_member' => 'Standard Mitglieder Avatar',
+'cfg_avatar_image_male' => 'Standard Männlicher Avatar',
+'cfg_avatar_image_female' => 'Standard Weiblicher Avatar',
 ###########
 'ft_avatar_set' => 'Avatar auswählen',
 'avatar' => 'Avatar',
