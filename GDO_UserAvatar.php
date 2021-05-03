@@ -2,24 +2,28 @@
 namespace GDO\Avatar;
 
 use GDO\Core\GDO;
-use GDO\DB\GDT_EditedAt;
 use GDO\DB\GDT_Object;
 use GDO\File\GDO_File;
 use GDO\User\GDT_User;
 use GDO\User\GDO_User;
 use GDO\DB\GDT_CreatedAt;
 
+/**
+ * Avatar entity.
+ * @author gizmore
+ * @version 6.10.1
+ */
 final class GDO_UserAvatar extends GDO
 {
 	public function gdoCached() { return false; }
 	
 	public function gdoColumns()
 	{
-		return array(
+		return [
 			GDT_User::make('avt_user_id')->primary(),
 			GDT_Object::make('avt_avatar_id')->table(GDO_Avatar::table())->notNull(),
 			GDT_CreatedAt::make('avt_created_at'),
-		);
+		];
 	}
 	
 	public static function updateAvatar(GDO_User $user, $avatarId)
@@ -33,7 +37,7 @@ final class GDO_UserAvatar extends GDO
 		{
 			GDO_UserAvatar::table()->deleteWhere('avt_user_id='.$user->getID());
 		}
-		$user->callRecacheHook();
+		$user->recache();
 		return true;
 	}
 	
@@ -43,4 +47,5 @@ final class GDO_UserAvatar extends GDO
 		$avatar = GDO_Avatar::blank(['avatar_file_id' => $file->getID()])->insert();
 		return self::updateAvatar($user, $avatar->getID());
 	}
+	
 }
