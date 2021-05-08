@@ -58,7 +58,7 @@ final class GDT_Avatar extends GDT_ObjectSelect
 	{
 		$gdo = $this->gdo;
 		$var = $this->var;
-		$html = Module_Avatar::instance()->templatePHP('choice/avatar.php', ['field'=>$this->gdo($avatar)]);
+		$html = Module_Avatar::instance()->php('choice/avatar.php', ['field'=>$this->gdo($avatar)]);
 		$this->gdo = $gdo;
 		$this->var = $var;
 		return $html;
@@ -66,6 +66,6 @@ final class GDT_Avatar extends GDT_ObjectSelect
 
 	public function renderCell()
 	{
-		return Module_Avatar::instance()->templatePHP('cell/avatar.php', ['field'=>$this]);
+		return Module_Avatar::instance()->php('cell/avatar.php', ['field'=>$this]);
 	}
 }
