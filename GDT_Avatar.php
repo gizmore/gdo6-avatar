@@ -9,7 +9,7 @@ final class GDT_Avatar extends GDT_ObjectSelect
 {
     use WithImageSize;
     
-    public function defaultLabel() { return $this->label('avatar'); }
+//     public function defaultLabel() { return $this->label('avatar'); }
     
 	protected function __construct()
 	{
