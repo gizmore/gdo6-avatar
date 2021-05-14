@@ -9,14 +9,26 @@ final class GDT_Avatar extends GDT_ObjectSelect
 {
     use WithImageSize;
     
-//     public function defaultLabel() { return $this->label('avatar'); }
+    public function defaultName() { return 'avatar'; }
+    public function defaultLabel() { return $this->label('avatar'); }
     
 	protected function __construct()
 	{
+	    parent::__construct();
 	    $this->icon = 'image';
 		$this->emptyLabel = 'choice_no_avatar';
 		$this->table(GDO_Avatar::table());
 	}
+	
+// 	public function __sleep()
+// 	{
+// // 	    $this->user = null;
+// // 	    parent::__sleep();
+// 	    $vars = get_object_vars($this);
+// 	    unset($vars['user']);
+// 	    unset($vars['gdo']);
+// 	    return array_keys($vars);
+// 	}
 	
 	/**
 	 * @var GDO_User
