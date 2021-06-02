@@ -1,18 +1,21 @@
 <?php
+namespace GDO\Avatar\Websocket;
+
 use GDO\Websocket\Server\GWS_CommandForm;
 use GDO\Avatar\Method\Upload;
 use GDO\Websocket\Server\GWS_Commands;
 use GDO\Websocket\Server\GWS_Global;
 use GDO\Websocket\Server\GWS_Message;
 use GDO\Avatar\GDO_Avatar;
+
 /**
  * Websocket method wrapper for avatar upload.
  * Sends an event to all connected users with "userToRefresh".
  * 
- * @version 6.07
- * @since 6.07
- * @license MIT
  * @author gizmore@wechall.net
+ * @license MIT
+ * @version 6.10.4
+ * @since 6.7.0
  **/
 class GWS_AvatarUpload extends GWS_CommandForm
 {
