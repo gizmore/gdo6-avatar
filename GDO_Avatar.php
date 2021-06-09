@@ -51,15 +51,17 @@ class GDO_Avatar extends GDO
 			}
 		}
 		
-		$module = Module_Avatar::instance();
-		foreach (array_reverse($keys) as $key)
+		if (module_enabled('Avatar'))
 		{
-			if ($file = $module->getConfigValue($key))
-			{
-				return $file->getID();
-			}
+    		$module = Module_Avatar::instance();
+    		foreach (array_reverse($keys) as $key)
+    		{
+    			if ($file = $module->getConfigValue($key))
+    			{
+    				return $file->getID();
+    			}
+    		}
 		}
-		
 		return '0';
 	}
 	
