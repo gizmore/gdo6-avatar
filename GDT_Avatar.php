@@ -5,6 +5,12 @@ use GDO\User\GDO_User;
 use GDO\DB\GDT_ObjectSelect;
 use GDO\UI\WithImageSize;
 
+/**
+ * An avatar.
+ * @author gizmore
+ * @version 6.10.4
+ * @since 6.4.0
+ */
 final class GDT_Avatar extends GDT_ObjectSelect
 {
     use WithImageSize;
@@ -19,16 +25,6 @@ final class GDT_Avatar extends GDT_ObjectSelect
 		$this->emptyLabel = 'choice_no_avatar';
 		$this->table(GDO_Avatar::table());
 	}
-	
-// 	public function __sleep()
-// 	{
-// // 	    $this->user = null;
-// // 	    parent::__sleep();
-// 	    $vars = get_object_vars($this);
-// 	    unset($vars['user']);
-// 	    unset($vars['gdo']);
-// 	    return array_keys($vars);
-// 	}
 	
 	/**
 	 * @var GDO_User
@@ -57,7 +53,8 @@ final class GDT_Avatar extends GDT_ObjectSelect
 	public function avatarChoices()
 	{
 		$query = GDO_Avatar::table()->select();
-		$result = $query->joinObject('avatar_file_id')->select('gdo_avatar.*, gdo_file.*')->where("avatar_public OR avatar_created_by={$this->user->getID()}")->exec();
+		$result = $query->joinObject('avatar_file_id')->select('gdo_avatar.*, gdo_file.*')->
+		  where("avatar_public OR avatar_created_by={$this->user->getID()}")->exec();
 		$choices = array();
 		while ($gwfAvatar = $result->fetchObject())
 		{

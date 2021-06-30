@@ -16,14 +16,21 @@ use GDO\Avatar\Module_Avatar;
 
 /**
  * Upload an avatar image.
+ * 
  * @author gizmore
- * @version 6.10
- * @since 6.02
+ * @version 6.10.4
+ * @since 6.2.0
  */
 final class Upload extends MethodForm
 {
 	public function isUserRequired() { return true; }
 	public function isGuestAllowed() { return Module_Avatar::instance()->cfgGuestAvatars(); }
+	
+	public function beforeExecute()
+	{
+	    Module_Account::instance()->renderAccountTabs();
+	    Settings::make()->navLinks();
+	}
 	
 	public function createForm(GDT_Form $form)
 	{
@@ -41,12 +48,6 @@ final class Upload extends MethodForm
 		$user->recache();
 		$this->resetForm();
 		Website::redirectMessage('msg_avatar_uploaded', null, href('Avatar', 'Set'));
-	}
-	
-	public function beforeExecute()
-	{
-		Module_Account::instance()->renderAccountTabs();
-		Settings::make()->navModules();
 	}
 	
 }

@@ -24,9 +24,18 @@ final class Set extends MethodForm
 	public function isUserRequired() { return true; }
 	public function isGuestAllowed() { return Module_Avatar::instance()->cfgGuestAvatars(); }
 	
+	public function beforeExecute()
+	{
+	    Module_Account::instance()->renderAccountTabs();
+	    Settings::make()->navLinks();
+	}
+	
 	public function createForm(GDT_Form $form)
 	{
-	    $form->addField(GDT_HTML::withHTML(GDT_Avatar::make()->currentUser()->imageSize(128)->css('margin-left', '32px')->css('margin-top', '16px')->renderCell()));
+	    $form->addField(
+	        GDT_HTML::make()->addField(
+	            GDT_Avatar::make()->currentUser()->
+	                imageSize(128)->css('margin', '16px')));
 		$form->addField(GDT_Avatar::make('avt_avatar_id')->currentUser());
 		$form->actions()->addField(GDT_Submit::make()->label('btn_set'));
 		$form->actions()->addField(GDT_Button::make('btn_upload')->href(href('Avatar', 'Upload'))->icon('upload'));
@@ -38,8 +47,8 @@ final class Set extends MethodForm
 	{
 		$user = GDO_User::current();
 		GDO_UserAvatar::updateAvatar($user, $form->getFormVar('avt_avatar_id'));
-		$user->recache();
-		$this->resetForm();
+// 		$user->recache();
+// 		$this->resetForm();
 		return $this->message('msg_avatar_set')->addField($this->renderPage());
 	}
 	
@@ -50,12 +59,5 @@ final class Set extends MethodForm
 			GDT_Hook::callWithIPC('AvatarSet', GDO_User::current());
 		}
 	}
-	
-	public function execute()
-	{
-		Module_Account::instance()->renderAccountTabs();
-		Settings::make()->navModules();
-		return parent::execute();
-	}
-	
+
 }
