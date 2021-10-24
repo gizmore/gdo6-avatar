@@ -9,5 +9,5 @@ $az = $field->imageWidth;
  style="width: <?=$az?>px; height: <?=$az?>px;"
  <?=$field->htmlAttributes()?>
   ><img alt="<?= t('avatar_of', [$field->user->displayNameLabel()]); ?>"
-   src="<?= href('Avatar', 'Image', '&ajax=1&file=' . GDO_Avatar::forUser($field->user)->getFileID()); ?>"
+   src="<?= href('Avatar', 'Image', '&_ajax=1&file=' . GDO_Avatar::forUser($field->user)->getFileID()); ?>"
    style="padding: <?=round($az/24,1)?>px; width: <?=$az?>px; height: <?=$az?>px;" /></span>
