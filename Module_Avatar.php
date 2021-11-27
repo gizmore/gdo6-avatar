@@ -38,10 +38,10 @@ final class Module_Avatar extends GDO_Module
 		return [
 		    GDT_Checkbox::make('avatar_guests')->initial('1'),
 		    GDT_Checkbox::make('avatar_sidebar')->initial('0'),
-		    GDT_ImageFile::make('avatar_image_guest')->previewHREF(href('Avatar', 'Image', '&file='))->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 375),
-		    GDT_ImageFile::make('avatar_image_member')->previewHREF(href('Avatar', 'Image', '&file='))->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 375),
-		    GDT_ImageFile::make('avatar_image_male')->previewHREF(href('Avatar', 'Image', '&file='))->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 375),
-		    GDT_ImageFile::make('avatar_image_female')->previewHREF(href('Avatar', 'Image', '&file='))->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 375),
+		    GDT_ImageFile::make('avatar_image_guest')->previewHREF(href('Avatar', 'Image', '&file={id}'))->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 375),
+		    GDT_ImageFile::make('avatar_image_member')->previewHREF(href('Avatar', 'Image', '&file={id}'))->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 375),
+		    GDT_ImageFile::make('avatar_image_male')->previewHREF(href('Avatar', 'Image', '&file={id}'))->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 375),
+		    GDT_ImageFile::make('avatar_image_female')->previewHREF(href('Avatar', 'Image', '&file={id}'))->scaledVersion('icon', 96, 96)->scaledVersion('thumb', 375, 375),
 		];
 	}
 	public function cfgGuestAvatars() { return $this->getConfigValue('avatar_guests'); }
