@@ -100,9 +100,9 @@ class GDO_Avatar extends GDO
 	 */
 	public function getGDOAvatar(GDO_User $user)
 	{
-		static $gdoType;
-		if (!$gdoType) $gdoType = GDT_Avatar::make();
-		return $gdoType->user($user)->gdo($this);
+		static $gdt;
+		if (!$gdt) $gdt = GDT_Avatar::make();
+		return $gdt->user($user)->gdo($this);
 	}
 	
 	public static function renderAvatar(GDO_User $user, $size=32)
